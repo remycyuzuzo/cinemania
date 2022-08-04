@@ -1,0 +1,64 @@
+{% extends '_user_base_template.html' %}
+
+<!-- Page title -->
+{%block page_title%} Latest Movies - Cinemira {%endblock%}
+
+<!-- Page main contents -->
+{%block content %}
+<!-- Start  -->
+{% load static %}
+
+<div class="d-flex justify-content-between">
+  <div class="page-title">
+    <h1>Latest Movies</h1>
+  </div>
+  <div class="sort">
+    <button class="btn"><i class="fas fa-sort"></i> Sort via Genres</button>
+  </div>
+</div>
+
+<!-- Movie posts -->
+<div class="movies">
+  {% if movies.count <= 0 %}
+  <div class="alert alert-dark">
+    <strong>No movies found!</strong>
+    Please <a href="{% url 'newMovie' %}">add</a> some movies.
+  </div>
+  {% endif %}
+  <div class="row">
+    {% for movie in movies %}
+    <div class="movie-card col-sm-6 col-md-4 col-lg-3 mb-3">
+      <div class="user mb-1 d-flex">
+        <div
+          class="img rounded-circle bg-dark overflow-hidden"
+          style="width: 45px; height: 45px"
+        >
+          <img
+            src="{% static 'images/users/patrick.jpg'%}"
+            class="w-100"
+            alt="user"
+          />
+        </div>
+        <div class="name px-2">
+          <span class="d-block" style="font-weight: 700"
+            >{{ movie.user.name }}</span
+          >
+          <small class="text-muted">posted {{ release_date }} ago</small>
+        </div>
+      </div>
+      <div class="card shadow-sm border-0 overflow-hidden">
+        <img
+          src="{% if movie.movie_poster is not None %}{{ movie.movie_poster }}{% else %} {{'/static/images/utilities/poster-placeholder.svg'}} {% endif %}"
+          class="w-100"
+          alt="{{movie.movie_poster}}"
+        />
+      </div>
+      <div class="movie-title">
+        <h3>{{ movie.title }}</h3>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+</div>
+
+{%endblock %}

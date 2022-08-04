@@ -1,0 +1,45 @@
+{% extends '_user_base_template.html' %}
+
+<!-- Page title -->
+{%block page_title%} Search results - Cinemania {%endblock%}
+
+<!-- Page main contents -->
+{%block content %} {% load static %}
+<div class="d-flex justify-content-between">
+  <div class="page-title">
+    <h1 class="mt-2">Search results for "Spiderman"</h1>
+  </div>
+  <div class="sort">
+    <button class="btn"><i class="fas fa-sort"></i> Sort via Genres</button>
+  </div>
+</div>
+
+<!-- Movie posts -->
+<div class="movies mt-4">
+  <div class="row">
+    <div class="movie-card col-lg-6 mb-3">
+      <div class="d-flex">
+        <div
+          class="shadow-sm border-0 overflow-hidden"
+          style="max-width: 200px"
+        >
+          <img
+            src="{% static 'images/movie-posters/spiderman-noway-home-poster.jpg' %}"
+            class="w-100"
+            alt="Movie name"
+          />
+        </div>
+        <div class="movie-title mx-lg-3 mx-2">
+          <h3>Spiderman: Noway home (2021)</h3>
+          <a class="genre">
+            <a href=""><span class="badge badge-primary bg-info">Action</span></a>
+            <a href=""><span class="badge badge-primary bg-info">Adventure</span></a>
+            <a href=""><span class="badge badge-primary bg-info">Fantasy</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock %}

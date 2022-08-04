@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{% static 'libs/bootstrap/dist/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'libs\fontawesome-free\css\all.min.css' %}"
+    />
+    <title>Document</title>
+  </head>
+  <body class="bg-light">
+    <!-- Bootstrap login page -->
+    <div class="container h-100">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+          <div class="card mt-4">
+            <div class="card-body">
+              <div class="text-center">
+                <h3 class="text-center">
+                  <i class="fas fa-film"></i>
+                  <span class="text-muted">Cinema</span>
+                </h3>
+              </div>
+              <h3 class="card-title my-4 text-center">
+                Create your account here
+              </h3>
+              <form action="" method="post">
+                <div class="form-group">
+                    <label for="name class="mb-2">Full Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                    />
+                </div>
+                
+                <div class="form-group mb-3">
+                  <label for="email" class="mb-2">email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <label for="password" class="mb-2">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    placeholder="Enter password"
+                  />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="image">Profile picture</label>
+                    <input type="file" name="image" id="image" class="form-control">
+                </div>
+                <button
+                  type="submit"
+                  class="btn w-100 d-inline-block btn-primary"
+                >
+                  <i class="fas fa-plus-circle"></i> Sign Up
+                </button>
+                <hr />
+                <div class="text-center">
+                  Already have an account? <a href="/login">Sign In</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

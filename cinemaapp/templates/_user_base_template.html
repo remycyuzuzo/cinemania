@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{% static 'libs/bootstrap/dist/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'libs\fontawesome-free\css\all.min.css' %}"
+    />
+    <script src="{% static 'libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <title>{%block page_title %}{%endblock%}</title>
+  </head>
+  <body class="bg-light">
+    <div class="navigation bg-white shadow shadow-sm sticky-top">
+      <div class="container">
+        <nav class="navbar">
+          <a class="navbar-brand" href="/"><h3 class="mb-0">CINEMANIA</h3></a>
+          <div class="left-menu d-flex align-items-center">
+            <a href="/add-new-movie" class="btn btn-danger">
+              <i class="fas fa-plus-circle"></i> Add your movie
+            </a>
+            <form action="" method="get" class="mx-2">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="search"
+                  class="form-control"
+                  placeholder="Search..."
+                />
+              </div>
+            </form>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="container">{%block content %} {%endblock %}</div>
+    </div>
+  </body>
+  <!-- inject additional JS scripts -->
+  {%block scripts %} {%endblock%}
+</html>
