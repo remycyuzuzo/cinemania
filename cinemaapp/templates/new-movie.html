@@ -52,14 +52,31 @@
           <input type="date" name="release_date" class="form-control" />
         </div>
         <div class="form-group mb-2">
-          <label for="actors" class="mb-2"
+          <label class="mb-2"
             >Main Cast <span class="text-danger">*</span></label
           >
-          <input type="text" id="actors" name="actors" class="form-control" />
+          <div class="actors">
+            <button
+              type="button"
+              class="btn rounded-5 btn-secondary btn-sm mb-2 border"
+              data-actor-selector-btn
+              data-bs-toggle="modal"
+              data-bs-target="#actor-selector-modal"
+            >
+              <i class="fas fa-plus"></i> Select actor(s)
+            </button>
+          </div>
+          <input
+            type="hidden"
+            id="actors"
+            name="actors"
+            data-actors
+            class="d-none"
+          />
         </div>
         <div class="form-group mb-2">
           <label for="synopsis" class="mb-2"
-            >Main Cast <span class="text-danger">*</span></label
+            >Synopsis <span class="text-danger">*</span></label
           >
           <textarea
             name="synopsis"
@@ -105,23 +122,66 @@
     </div>
   </form>
 </div>
+<!-- Bootstrap modal -->
+<div
+  class="modal fade"
+  id="actor-selector-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="actor-selector-modal-label"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="actor-selector-modal-label">
+          Select actors
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group mb-2">
+          <label for="actor-selector" class="mb-2">Actor</label>
+          <div class="position-relative">
+            <input
+              type="text"
+              name="actor"
+              class="form-control actor-selector-input"
+            />
+          </div>
+        </div>
+        <div class="actors-div"></div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light border"
+          data-bs-dismiss="modal"
+        >
+          <i class="fas fa-arrow-alt-circle-left"></i> Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-dark"
+          data-dismiss="modal"
+          data-actor-selector-btn-add
+        >
+          Add <i class="fas fa-check-circle"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  {%endblock%}
 
-{%endblock%}
-
-<!-- Inject JS -->
-{%block scripts %}
-<script src="{% static 'resources/js/new-movie-form-validator.js' %}"></script>
-<script></script>
-{%endblock%}
-
-<!-- inject additional CSS specifically for this page -->
-{%block inject_css %}
-<link
-  rel="stylesheet"
-  href="{%static 'libs\vanillajs-select2\dist\css\nice-select2.css'%}"
-/>
-<link
-  rel="stylesheet"
-  href="{%static 'libs\vanillajs-select2\dist\css\style.css'%}"
-/>
-{% endblock %}
+  <!-- Inject JS -->
+  {%block scripts %}
+  <script src="{% static 'resources/js/new-movie-form-validator.js' %}"></script>
+  <script src="{% static 'resources/js/actor-selector.js' %}"></script>
+  <script src="{% static 'libs\axios\dist\axios.min.js' %}"></script>
+  {%endblock%}
+</div>

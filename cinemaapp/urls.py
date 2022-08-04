@@ -10,6 +10,7 @@ urlpatterns = [
     path('sign-up/', views.sign_up),
     path('add-new-movie/', views.newMovie, name='newMovie'),
     path('search/', views.searchResults),
+    path('actors/', views.findActor),
 ]
 
 if settings.DEBUG:

@@ -11,9 +11,10 @@
     />
     <link
       rel="stylesheet"
-      href="{% static 'libs\fontawesome-free\css\all.min.css' %}"
+      href="{% static 'libs/fontawesome-free/css/all.min.css' %}"
     />
-    <script src="{% static 'libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <link href="{% static 'resources/css/styles.css' %}" rel="stylesheet" />
+    <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.js' %}"></script>
     <title>{%block page_title %}{%endblock%}</title>
   </head>
   <body class="bg-light">
@@ -35,6 +36,20 @@
                 />
               </div>
             </form>
+            <div class="dropdown">
+              <button
+                class="btn btn-sm btn-light dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                @{{ user.username }}
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Logout</a></li>
+              </ul>
+            </div>
           </div>
         </nav>
       </div>

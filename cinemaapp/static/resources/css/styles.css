@@ -1,0 +1,17 @@
+ul.actors {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ul.actors li {
+  display: inline-block;
+  background-color: #f2f2f2;
+  color: rgb(14, 14, 14);
+  padding: 6px 12px;
+  margin-right: 10px;
+}
+ul.actors li button.delete-actor {
+  background-color: #f2f2f2;
+  border: none;
+  cursor: pointer;
+}

@@ -1,4 +1,5 @@
-from django.http import HttpResponseRedirect
+import json
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from .models import Movie, Actor
 from django.core.files.storage import FileSystemStorage
@@ -18,6 +19,13 @@ def index(request):
     movieData = Movie.objects.all()
 
     return render(request, 'index.html', {'movies': movieData})
+
+
+def findActor(request):
+    if request.method == 'GET':
+        actorName = request.GET.get('actor_name')
+        actorData = Actor.objects.filter(name=actorName)
+        return HttpResponse(json.dumps(list(actorData.values())), content_type="application/json")
 
 
 def newMovie(request):
