@@ -1,25 +1,32 @@
 {% extends '_user_base_template.html' %}
 
 <!-- Page title -->
-{%block page_title%} you searched "{{ keyword }}" - Cinemania {%endblock%}
+{%block page_title%} {{ actorInfo.name }} - Cinemania {%endblock%}
 
 <!-- Page main contents -->
 {%block content %} {% load static %}
-<div class="d-flex justify-content-between">
-  <div class="page-title">
-    <h1 class="mt-2">Search results for "{{ keyword }}"</h1>
-  </div>
+<div class="my-2">
+  <div class="page-title bg-secondary px-2 py-3">
+    <div class="d-flex align-items-center text-light">
+        <div class="img rounded-circle bg-dark overflow-hidden d-flex align-items-center justify-content-center" style="width: 90px; height: 90px">
+          <i class="fas fa-user"></i>
+        </div>
+        <h3 class="px-2 text-white"><span class="text-white-50">Actor </span> {{ actorInfo.name }}</h3>
+    </div>
+    <hr />
+    <p class="text-light mb-1 px-2"><span class="text-white-50">Starred in </span> {{ movies.count }} movie(s)</p>     
+</div>
 </div>
 
 <!-- Movie posts -->
 <div class="movies mt-4">
-  {% if results.count <= 0 %}
+  {% if movies.count <= 0 %}
   <div class="bg-light rounded-2 p-2 p-md-4 text-center">
-    No movies were found with the keyword of "{{ keyword }}"
+    <h3>This actor hasn't starred in any movie</h3>
   </div>
   {% else %}
   <div class="row">
-    {% for movie in results %}
+    {% for movie in movies %}
     <div class="movie-card col-lg-6 mb-3">
       <a href="/movie-details/{{ movie.id }}/" class="d-block">
         <div class="d-flex bg-white rounded-3 overflow-hidden shadow">

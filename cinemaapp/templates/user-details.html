@@ -1,25 +1,40 @@
 {% extends '_user_base_template.html' %}
 
 <!-- Page title -->
-{%block page_title%} you searched "{{ keyword }}" - Cinemania {%endblock%}
+{%block page_title%} @{{ user_info.username }} - Cinemania {%endblock%}
 
 <!-- Page main contents -->
 {%block content %} {% load static %}
-<div class="d-flex justify-content-between">
-  <div class="page-title">
-    <h1 class="mt-2">Search results for "{{ keyword }}"</h1>
-  </div>
+<div class="my-2">
+  <div class="page-title bg-secondary px-2 py-3">
+    <div class="d-flex align-items-center">
+        <div class="img rounded-circle bg-dark overflow-hidden" style="width: 90px; height: 90px">
+          <img
+            src="{{ user_info.profile_image }}"
+            class="w-100"
+            alt="user"
+          />
+        </div>
+        <h3 class="px-2 text-white">{{ user_info.name }} <span class="text-white-50">@{{ user_info.username }}</span></h3>
+    </div>
+    <hr />
+    <p class="text-light mb-1 px-2"><span class="text-white-50">A member since</span> {{ user_info.date_joined }}</p>    
+    <p class="text-light mb-1 px-2"><span class="text-white-50">Gender</span> {{ user_info.gender }}</p>    
+    <p class="text-light mb-1 px-2"><span class="text-white-50">Aged </span> {{ user_info.age }} years old</p>    
+    <p class="text-light mb-1 px-2"><span class="text-white-50">Email address is </span> {{ user_info.email }}</p>    
+    <p class="text-light mb-1 px-2"><span class="text-white-50">Posted </span> {{ movies.count }} movies</p>    
+</div>
 </div>
 
 <!-- Movie posts -->
 <div class="movies mt-4">
-  {% if results.count <= 0 %}
+  {% if movies.count <= 0 %}
   <div class="bg-light rounded-2 p-2 p-md-4 text-center">
-    No movies were found with the keyword of "{{ keyword }}"
+    <h3>This user hasn't posted any movie</h3>
   </div>
   {% else %}
   <div class="row">
-    {% for movie in results %}
+    {% for movie in movies %}
     <div class="movie-card col-lg-6 mb-3">
       <a href="/movie-details/{{ movie.id }}/" class="d-block">
         <div class="d-flex bg-white rounded-3 overflow-hidden shadow">

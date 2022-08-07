@@ -5,6 +5,14 @@
 
 <!-- Main content -->
 {%block content %}
+<div class="my-2">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">New Movie</li>
+    </ol>
+  </nav>
+</div>
 <h2 class="mt-3">Share your favorite movie with the community</h2>
 <span class="text-muted"
   >Any field marked with <span class="text-danger">*</span> is required</span
@@ -38,25 +46,32 @@
             <option disabled selected>
               Select the genre <i class="fas fa-sort"></i>
             </option>
-            <option value="">Comedy</option>
-            <option value="">Romance</option>
-            <option value="">Action</option>
-            <option value="">Adventure</option>
-            <option value="">Sci-fi</option>
+            <option>Comedy</option>
+            <option>Romance</option>
+            <option>Action</option>
+            <option>Adventure</option>
+            <option>Sci-fi</option>
           </select>
         </div>
         <div class="form-group mb-2">
-          <label for="movie_title" class="mb-2"
-            >Release date <span class="text-danger">*</span></label
-          >
+          <label for="movie_title" class="mb-2">
+            Release date <span class="text-danger">*</span>
+          </label>
           <input type="date" name="release_date" class="form-control" />
         </div>
         <div class="form-group mb-2">
-          <label class="mb-2"
-            >Main Cast <span class="text-danger">*</span></label
-          >
-          <div class="actors">
-            <button
+          <label class="mb-2">
+            Main Cast <span class="text-danger">*</span>
+          </label>
+          <div class="actors selected-actors-list">
+            <div class="actor-item">
+              <input
+                type="text"
+                name="actors"
+                class="form-control"
+                placeholder="Enter a comma-separated actors list"
+              />
+            <!-- <button
               type="button"
               class="btn rounded-5 btn-secondary btn-sm mb-2 border"
               data-actor-selector-btn
@@ -64,15 +79,10 @@
               data-bs-target="#actor-selector-modal"
             >
               <i class="fas fa-plus"></i> Select actor(s)
-            </button>
+            </button> -->
+            <!-- <div class="actor-list"></div> -->
           </div>
-          <input
-            type="hidden"
-            id="actors"
-            name="actors"
-            data-actors
-            class="d-none"
-          />
+          <!-- <select name="actors" multiple class="d-none" data-actors id="actors"></select> -->
         </div>
         <div class="form-group mb-2">
           <label for="synopsis" class="mb-2"
@@ -87,6 +97,7 @@
         </div>
       </div>
     </div>
+    </div>
     <div class="col-lg-4">
       <div class="form-column">
         <div class="form-group mb-2">
@@ -100,7 +111,7 @@
           <input
             type="text"
             id="trailer"
-            name="trailer"
+            name="movie_trailer_link"
             placeholder="Movie link to trailer"
             class="form-control"
           />
@@ -152,7 +163,10 @@
               type="text"
               name="actor"
               class="form-control actor-selector-input"
+              autocomplete="off"
             />
+            <ul class="auto-complete-list">
+            </ul>
           </div>
         </div>
         <div class="actors-div"></div>
@@ -181,7 +195,7 @@
   <!-- Inject JS -->
   {%block scripts %}
   <script src="{% static 'resources/js/new-movie-form-validator.js' %}"></script>
-  <script src="{% static 'resources/js/actor-selector.js' %}"></script>
+  <!-- <script src="{% static 'resources/js/actor-selector.js' %}"></script> -->
   <script src="{% static 'libs\axios\dist\axios.min.js' %}"></script>
   {%endblock%}
 </div>

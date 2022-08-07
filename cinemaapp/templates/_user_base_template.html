@@ -21,12 +21,12 @@
     <div class="navigation bg-white shadow shadow-sm sticky-top">
       <div class="container">
         <nav class="navbar">
-          <a class="navbar-brand" href="/"><h3 class="mb-0">CINEMANIA</h3></a>
+          <a class="navbar-brand" href="/"><h3 class="mb-0"><i class="fas fa-film"></i> CINEMANIA</h3></a>
           <div class="left-menu d-flex align-items-center">
             <a href="/add-new-movie" class="btn btn-danger">
               <i class="fas fa-plus-circle"></i> Add your movie
             </a>
-            <form action="" method="get" class="mx-2">
+            <form action="{% url 'searchMovies' %}" method="get" class="mx-2">
               <div class="form-group">
                 <input
                   type="text"
@@ -47,7 +47,13 @@
                 @{{ user.username }}
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Logout</a></li>
+                <li>
+                  <form action="/logout/" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="dropdown-item ">Logout</button>
+                  </form>
+                  
+                </li>
               </ul>
             </div>
           </div>

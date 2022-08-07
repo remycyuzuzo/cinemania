@@ -1,0 +1,92 @@
+{% extends '_user_base_template.html' %}
+
+<!-- Page title -->
+{%block page_title%} {{ details.title }} - Cinemania {%endblock%}
+
+<!-- Page main contents -->
+{%block content %} {% load static %}
+<!-- Movie posts -->
+<div class="my-2 d-flex flex-wrap justify-content-between">
+    <div class="d-flex align-items-center">
+        <button class="btn btn-light rounded-4 border" onclick="history.back()"><i class="fas fa-arrow-left"></i> go back</button>
+            <h3 class="mx-2 mb-0">{{ details.title }}</h3>
+    </div>
+    <div>
+        <div class="mx-2">
+            shared by <b>{% if details.user.id is not user.id %} <a href="/user/{{ details.user.username }}/">@{{ details.user.username }}</a>{% else %} Me {%endif%}</b>
+             on {{ details.date_time_added }}
+            <button class="btn btn-light mx-2 rounded-4 border sharer">
+                <i class="fas fa-share"></i> share
+            </button>
+            {% if details.user.id is user.id %}
+                <form action="/delete-movie/{{ details.id }}/" method="post" class="p-0 m-0 d-inline-block">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-light mx-2 rounded-4 border">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </form>            
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="movies mt-4">
+    <div class="mb-3">
+        <div class="row">
+            <div class="col-lg-5 overflow-hidden" style="max-height: 95vh">
+                <img
+                    src="{{ details.movie_poster }}"
+                    class="h-100"
+                    alt="Movie name"
+                />
+            </div>
+            <div class="movie-title col-lg-7">
+                <h1>{{ details.title }} </h1>
+                <span class="badge badge-primary bg-info">{{ details.genre }}</span>
+                <span> released on {{ details.release_date }}</span>
+                <div class="my-2">
+                    <h3>Synopsis</h3>
+                    <p>{{ details.description }}</p>
+                </div>
+                {% if details.actors and details.actors.count > 0 %}
+                <div class="my-2">
+                    <h3>Main cast</h3>
+                    <ul>
+                        {% for actor in details.actors.filter %}
+                            <li><a href="/actor/{{ actor.id }}/">{{ actor.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>                
+                {% endif %}
+                <div class="my-2">
+                    {% if details.movie_trailer_link %}
+                        <a href="{{ details.movie_trailer_link }}" class="btn btn-primary d-block" target="_blank"><i class="fas fa-film"></i> Watch the trailer</a>
+                    {% endif %}
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock %}
+
+{% block scripts %}
+<script>
+    const shareData = {
+    title: `{{ details.title }}`,
+    text: `{{ details.description }}`,
+    url: `{{ details.movie_trailer_link }}`,
+    }
+
+    const btn = document.querySelector('.sharer');
+
+    // Share must be triggered by "user activation"
+    btn.addEventListener('click', async () => {
+    try {
+        await navigator.share(shareData)
+    } catch(err) {
+        console.warn(err);
+    }
+});
+</script>
+{%endblock%}

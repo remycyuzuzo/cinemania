@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Gurmukhi:ital@0;1&display=swap');
+body{
+  font-family: 'Tiro Gurmukhi', serif;
+
+}
+.movie-card a {
+  text-decoration: none;
+  color: inherit;
+  background-color: #ffffff;
+  transition: transform .2s ease-out;
+}
+.movie-card a:hover {
+  transform: scale(1.03);
+}
 ul.actors {
   list-style-type: none;
   margin: 0;
@@ -14,4 +28,19 @@ ul.actors li button.delete-actor {
   background-color: #f2f2f2;
   border: none;
   cursor: pointer;
+}
+
+ul.auto-complete-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: -1px 1px 4px rgba(0, 0, 0, .2);
+}
+ul.auto-complete-list li {
+  padding: 6px 14px;
+  background-color: #ffffff;
+}
+ul.auto-complete-list li a {
+  text-decoration: none;
+  color: inherit;
 }

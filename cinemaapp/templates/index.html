@@ -8,13 +8,24 @@
 <!-- Start  -->
 {% load static %}
 
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between my-2">
   <div class="page-title">
-    <h1>Latest Movies</h1>
+    <h1>
+      {% if filter %}
+        {{filter}} Movies
+      {% else %}
+        Latest Movies
+      {% endif %}
+    </h1>
   </div>
-  <div class="sort">
-    <button class="btn"><i class="fas fa-sort"></i> Sort via Genres</button>
+  <div class="sort mt-2">
+    <button type="button" class="btn" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-sort"></i> Sort via Genres</button>
   </div>
+</div>
+<div class="collapse my-2 border-top py-2" id="collapseExample">
+  {% for genre in genres %}
+    <a href="/genre/{{genre.genre}}/" class="btn btn-light border  border-2">{{ genre.genre }}</a>
+  {% endfor %}
 </div>
 
 <!-- Movie posts -->
@@ -33,29 +44,30 @@
           class="img rounded-circle bg-dark overflow-hidden"
           style="width: 45px; height: 45px"
         >
+        <a href="/user/{{ movie.user.username }}/">
           <img
-            src="{% static 'images/users/patrick.jpg'%}"
+            src="{{ movie.user.profile_image }}"
             class="w-100"
             alt="user"
           />
+        </a>
         </div>
         <div class="name px-2">
-          <span class="d-block" style="font-weight: 700"
-            >{{ movie.user.name }}</span
-          >
-          <small class="text-muted">posted {{ release_date }} ago</small>
+          <span class="d-block" style="font-weight: 700"><a href="/user/{{ movie.user.username }}/"> {{ movie.user.name }}</a></span>
+          <small class="text-muted">on <b>{{ movie.date_time_added }}</b></small>
         </div>
       </div>
-      <div class="card shadow-sm border-0 overflow-hidden">
-        <img
-          src="{% if movie.movie_poster is not None %}{{ movie.movie_poster }}{% else %} {{'/static/images/utilities/poster-placeholder.svg'}} {% endif %}"
-          class="w-100"
-          alt="{{movie.movie_poster}}"
-        />
-      </div>
-      <div class="movie-title">
-        <h3>{{ movie.title }}</h3>
-      </div>
+      <a href="/movie-details/{{ movie.id }}/" class="d-block">
+        <div class="movie">
+          <div class="card shadow-sm border-0 overflow-hidden">
+            <img src="{% if movie.movie_poster or movie.movie_poster != ""%}{{movie.movie_poster }} {% else %}{{'/static/images/utilities/poster-placeholder.svg'}} {% endif %}"
+            class="w-100" alt="{{movie.movie_poster}}" />
+          </div>
+          <div class="movie-title mt-2">
+            <h3>{{ movie.title }}</h3>
+          </div>
+        </div>
+      </a>
     </div>
     {%endfor%}
   </div>

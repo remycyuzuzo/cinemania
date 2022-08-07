@@ -11,7 +11,7 @@
     />
     <link
       rel="stylesheet"
-      href="{% static 'libs\fontawesome-free\css\all.min.css' %}"
+      href="{% static 'libs/fontawesome-free/css/all.min.css' %}"
     />
     <title>Document</title>
   </head>
@@ -25,15 +25,16 @@
               <div class="text-center">
                 <h3 class="text-center">
                   <i class="fas fa-film"></i>
-                  <span class="text-muted">Cinema</span>
+                  <span class="text-muted">CINEMANIA</span>
                 </h3>
               </div>
               <h3 class="card-title my-4 text-center">
                 Create your account here
               </h3>
-              <form action="" method="post">
-                <div class="form-group">
-                    <label for="name class="mb-2">Full Name</label>
+              <form action="/sign-up/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    <label for="name" class="mb-2">Full Name</label>
                     <input
                         type="text"
                         class="form-control"
@@ -41,6 +42,18 @@
                         name="name"
                         placeholder="Enter your full name"
                     />
+                </div>
+                <div class="form-group mb-3">
+                  <label for="gender" class="mb-2">Gender</label>
+                  <select class="form-control" name="gender">
+                    <option disabled selected>Choose</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                  </select>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="age" class="mb-2">How old are you?</label>
+                  <input type="text" name="age" id="age" placeholder="Please enter your age" class="form-control">
                 </div>
                 
                 <div class="form-group mb-3">
@@ -51,6 +64,16 @@
                     id="email"
                     name="email"
                     placeholder="Enter your email address"
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <label for="username" class="mb-2">username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    name="username"
+                    placeholder="choose your username"
                   />
                 </div>
                 <div class="form-group mb-3">
